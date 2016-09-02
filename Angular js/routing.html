@@ -1,31 +1,47 @@
+
 <html>
-    <head>
-        <title>RoutingDemo App</title>
-    </head>
-    <body ng-app='routingDemoApp'>
-     
-        <h2>AngularJS Routing Application</h2>
-        <ul>
-            <li><a href="#/">Default Route</a></li>
-            <li><a href="#/computers">Computer Route</a></li>
-            <li><a href="#/printers">Printers Route</a></li>
-            <li><a href="#/blabla">Unknown Route</a></li>
-        </ul>
-         
-        <div ng-view></div>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>
-        <script>
-            angular.module('routingDemoApp',['ngRoute'])
-            .config(['$routeProvider', function($routeProvider){
-                $routeProvider
-                .when('/',{template:'This is the default Route'})
-                .when('/computers',{template:'This is the computers Route'})
-                .when('/printers',{template:'This is the printers Route'})
-                .otherwise({redirectTo:'/'});
-            }]);
-        </script>
-     
-     
-    </body>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>
+
+</head>
+<body ng-app='myApp'>
+<h2> </h2>
+<a href="#/">root</a>
+<a href="#/paris">paris</a>
+<a href="#/london">london</a>
+
+<div ng-view> Hi im view. </div>
+
+<script>
+var app=angular.module("myApp",["ngRoute"]);
+
+app.config(function($routeProvider){
+$routeProvider
+.when("/",{
+       templateUrl:"routing.html",
+	   })
+.when("/london",{
+       templateUrl:"Partials/london.html",
+	   controller:"londonCtrl"
+	   })
+
+.when("/paris",{
+       templateUrl:"Partials/paris.html",
+	   controller:"parisCtrl"
+	   });
+});
+
+app.controller("londonCtrl",function($scope){
+$scope.msg="I love london" ; 
+});
+
+app.controller("parisCtrl",function($scope){
+$scope.msg="I love paris" ; 
+});
+
+
+</script>
+</body>
 </html>
+
